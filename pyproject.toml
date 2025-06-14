@@ -1,0 +1,20 @@
+[project]
+name = "video-search-and-summarization"
+description = "Video Search and Summarization"
+version = "0.0.1"
+dependencies = [
+    "jupyterlab>=4.0.0",
+    "jupyterlab-git>=0.44.0",
+    "jupyter-app-launcher>=0.1.0",
+]
+
+[tool.brev]
+cloud = "aws"
+instance_type = "g6e.12xlarge"
+storage = 512
+ports = [
+    { name = "jupyter", port = 8888 },
+    { name = "frontend", port = 9100 },
+    { name = "api", port = 8100 }
+]
+valid_driver_versions = [535, 570]

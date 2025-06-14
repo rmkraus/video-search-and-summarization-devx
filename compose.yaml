@@ -1,0 +1,448 @@
+######################################################################################################
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+######################################################################################################
+
+configs:
+  server_config_single_gpu:
+    content: |
+      summarization:
+        enable: true
+        method: "batch"
+        llm:
+          model: "meta/llama-3.1-70b-instruct"
+          base_url: "https://integrate.api.nvidia.com/v1"
+          max_tokens: 2048
+          temperature: 0.2
+          top_p: 0.7
+        embedding:
+          model: "nvidia/llama-3.2-nv-embedqa-1b-v2"
+          base_url: "https://integrate.api.nvidia.com/v1"
+        params:
+          batch_size: 5
+          batch_max_concurrency: 20
+        prompts:
+          caption: "Write a concise and clear dense caption for the provided warehouse video, focusing on irregular or hazardous events such as boxes falling, workers not wearing PPE, workers falling, workers taking photographs, workers chitchatting, forklift stuck, etc. Start and end each sentence with a time stamp."
+          caption_summarization: "You should summarize the following events of a warehouse in the format start_time:end_time:caption. For start_time and end_time use . to seperate seconds, minutes, hours. If during a time segment only regular activities happen, then ignore them, else note any irregular activities in detail. The output should be bullet points in the format start_time:end_time: detailed_event_description. Don't return anything else except the bullet points."
+          summary_aggregation: "You are a warehouse monitoring system. Given the caption in the form start_time:end_time: caption, Aggregate the following captions in the format start_time:end_time:event_description. If the event_description is the same as another event_description, aggregate the captions in the format start_time1:end_time1,...,start_timek:end_timek:event_description. If any two adjacent end_time1 and start_time2 is within a few tenths of a second, merge the captions in the format start_time1:end_time2. The output should only contain bullet points.  Cluster the output into Unsafe Behavior, Operational Inefficiencies, Potential Equipment Damage and Unauthorized Personnel"
+
+      chat:
+        rag: graph-rag # graph-rag or vector-rag #If using a small LLM model, vector-rag is recommended.
+        params:
+          batch_size: 5
+          top_k: 5
+        llm:
+          model: "meta/llama-3.1-70b-instruct"
+          base_url: "https://integrate.api.nvidia.com/v1"
+          max_tokens: 2048
+          temperature: 0.2
+          top_p: 0.7
+        embedding:
+          model: "nvidia/llama-3.2-nv-embedqa-1b-v2"
+          base_url: "https://integrate.api.nvidia.com/v1"
+        reranker:
+          model: "nvidia/llama-3.2-nv-rerankqa-1b-v2"
+          base_url: "https://integrate.api.nvidia.com/v1"
+
+      notification:
+        enable: true
+        endpoint: "http://host.docker.internal:60000/via-alert-callback"
+        llm:
+          model: "meta/llama-3.1-70b-instruct"
+          base_url: "https://integrate.api.nvidia.com/v1"
+          max_tokens: 2048
+          temperature: 0.2
+          top_p: 0.7
+
+  server_config_dual_gpu:
+    content: |
+      summarization:
+        enable: true
+        method: "batch"
+        llm:
+          model: meta/llama-3.1-8b-instruct
+          base_url: http://llama-3-1-8b-instruct:8000/v1
+          max_tokens: 2048
+          temperature: 0.2
+          top_p: 0.7
+        embedding:
+          model: "nvidia/llama-3.2-nv-embedqa-1b-v2"
+          base_url: http://llama-3-2-nv-embedqa:8000/v1
+        params:
+          batch_size: 5
+          batch_max_concurrency: 20
+        prompts:
+          caption: "Write a concise and clear dense caption for the provided warehouse video, focusing on irregular or hazardous events such as boxes falling, workers not wearing PPE, workers falling, workers taking photographs, workers chitchatting, forklift stuck, etc. Start and end each sentence with a time stamp."
+          caption_summarization: "You should summarize the following events of a warehouse in the format start_time:end_time:caption. For start_time and end_time use . to seperate seconds, minutes, hours. If during a time segment only regular activities happen, then ignore them, else note any irregular activities in detail. The output should be bullet points in the format start_time:end_time: detailed_event_description. Don't return anything else except the bullet points."
+          summary_aggregation: "You are a warehouse monitoring system. Given the caption in the form start_time:end_time: caption, Aggregate the following captions in the format start_time:end_time:event_description. If the event_description is the same as another event_description, aggregate the captions in the format start_time1:end_time1,...,start_timek:end_timek:event_description. If any two adjacent end_time1 and start_time2 is within a few tenths of a second, merge the captions in the format start_time1:end_time2. The output should only contain bullet points.  Cluster the output into Unsafe Behavior, Operational Inefficiencies, Potential Equipment Damage and Unauthorized Personnel"
+
+      chat:
+        rag: graph-rag # graph-rag or vector-rag #If using a small LLM model, vector-rag is recommended.
+        params:
+          batch_size: 5
+          top_k: 5
+        llm:
+          model: meta/llama-3.1-8b-instruct
+          base_url: http://llama-3-1-8b-instruct:8000/v1
+          max_tokens: 2048
+          temperature: 0.2
+          top_p: 0.7
+        embedding:
+          model: "nvidia/llama-3.2-nv-embedqa-1b-v2"
+          base_url: http://llama-3-2-nv-embedqa:8000/v1
+        reranker:
+          model: "nvidia/llama-3.2-nv-rerankqa-1b-v2"
+          base_url: http://llama-3.2-nv-rerankqa:8000/v1
+
+      notification:
+        enable: true
+        endpoint: "http://host.docker.internal:60000/via-alert-callback"
+        llm:
+          model: meta/llama-3.1-8b-instruct
+          base_url: http://llama-3-1-8b-instruct:8000/v1
+          max_tokens: 2048
+          temperature: 0.2
+          top_p: 0.7
+
+  server_config_quad_gpu:
+    content: |
+      summarization:
+        enable: true
+        method: "batch"
+        llm:
+          model: "meta/llama-3.1-70b-instruct"
+          base_url: http://llama-3-1-70b-instruct:8000/v1
+          max_tokens: 2048
+          temperature: 0.2
+          top_p: 0.7
+        embedding:
+          model: "nvidia/llama-3.2-nv-embedqa-1b-v2"
+          base_url: http://llama-3-2-nv-embedqa:8000/v1
+        params:
+          batch_size: 5
+          batch_max_concurrency: 20
+        prompts:
+          caption: "Write a concise and clear dense caption for the provided warehouse video, focusing on irregular or hazardous events such as boxes falling, workers not wearing PPE, workers falling, workers taking photographs, workers chitchatting, forklift stuck, etc. Start and end each sentence with a time stamp."
+          caption_summarization: "You should summarize the following events of a warehouse in the format start_time:end_time:caption. For start_time and end_time use . to seperate seconds, minutes, hours. If during a time segment only regular activities happen, then ignore them, else note any irregular activities in detail. The output should be bullet points in the format start_time:end_time: detailed_event_description. Don't return anything else except the bullet points."
+          summary_aggregation: "You are a warehouse monitoring system. Given the caption in the form start_time:end_time: caption, Aggregate the following captions in the format start_time:end_time:event_description. If the event_description is the same as another event_description, aggregate the captions in the format start_time1:end_time1,...,start_timek:end_timek:event_description. If any two adjacent end_time1 and start_time2 is within a few tenths of a second, merge the captions in the format start_time1:end_time2. The output should only contain bullet points.  Cluster the output into Unsafe Behavior, Operational Inefficiencies, Potential Equipment Damage and Unauthorized Personnel"
+
+      chat:
+        rag: graph-rag # graph-rag or vector-rag #If using a small LLM model, vector-rag is recommended.
+        params:
+          batch_size: 5
+          top_k: 5
+        llm:
+          model: "meta/llama-3.1-70b-instruct"
+          base_url: http://llama-3-1-70b-instruct:8000/v1
+          max_tokens: 2048
+          temperature: 0.2
+          top_p: 0.7
+        embedding:
+          model: "nvidia/llama-3.2-nv-embedqa-1b-v2"
+          base_url: http://llama-3-2-nv-embedqa:8000/v1
+        reranker:
+          model: "nvidia/llama-3.2-nv-rerankqa-1b-v2"
+          base_url: http://llama-3.2-nv-rerankqa:8000/v1
+
+      notification:
+        enable: true
+        endpoint: "http://host.docker.internal:60000/via-alert-callback"
+        llm:
+          model: "meta/llama-3.1-70b-instruct"
+          base_url: http://llama-3-1-70b-instruct:8000/v1
+          max_tokens: 2048
+          temperature: 0.2
+          top_p: 0.7
+
+services:
+  ## VIA SERVER PROFILES
+  via-server-single-gpu: &via-server-single-gpu
+    hostname: via-server
+    image: ${VIA_IMAGE:-nvcr.io/nvidia/blueprint/vss-engine:2.3.0}
+    runtime: nvidia
+    restart: always
+    ports:
+      - "8100:8100"
+      - "9100:9100"
+    healthcheck:
+      test: ["CMD", "sh", "-c", "curl -f http://localhost:8100/health/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 300s
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["0"]
+              capabilities: [gpu]
+    configs:
+      - source: server_config_single_gpu
+        target: /opt/nvidia/via/default_config.yaml
+    volumes:
+      - via-ngc-model-cache:/root/.via/ngc_model_cache
+      - via-hf-cache:/tmp/huggingface
+    environment:
+      GRAPH_RAG_PROMPT_CONFIG: "${GRAPH_RAG_PROMPT_CONFIG:-}"
+      AZURE_OPENAI_API_KEY: "${AZURE_OPENAI_API_KEY:-}"
+      AZURE_OPENAI_ENDPOINT: "${AZURE_OPENAI_ENDPOINT:-}"
+      BACKEND_PORT: "8100"
+      DISABLE_CA_RAG: "${DISABLE_CA_RAG:-false}"
+      DISABLE_FRONTEND: "${DISABLE_FRONTEND:-false}"
+      DISABLE_GUARDRAILS: "${DISABLE_GUARDRAILS:-false}"
+      DISABLE_CV_PIPELINE: "${DISABLE_CV_PIPELINE:-true}"
+      FRONTEND_PORT: "9100"
+      MILVUS_DB_HOST: "${MILVUS_DB_HOST:-}"
+      MILVUS_DB_PORT: "${MILVUS_DB_PORT:-}"
+      MODEL_PATH: "${MODEL_PATH:-}"
+      NGC_API_KEY: "${NGC_API_KEY:-}"
+      GDINO_MODEL_PATH: "${GDINO_MODEL_PATH:-}"
+      NV_LLMG_CLIENT_ID: "${NV_LLMG_CLIENT_ID:-}"
+      NV_LLMG_CLIENT_SECRET: "${NV_LLMG_CLIENT_SECRET:-}"
+      NVIDIA_API_KEY: "${NGC_API_KEY:-}"
+      NVIDIA_VISIBLE_DEVICES: "${NVIDIA_VISIBLE_DEVICES:-all}"
+      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
+      OPENAI_API_VERSION: "${OPENAI_API_VERSION:-}"
+      TRT_ENGINE_PATH: "${TRT_ENGINE_PATH:-}"
+      TRT_LLM_MODE: "${TRT_LLM_MODE:-}"
+      VIA_VLM_OPENAI_MODEL_DEPLOYMENT_NAME: "${VIA_VLM_OPENAI_MODEL_DEPLOYMENT_NAME:-}"
+      VIA_VLM_API_KEY: "${VIA_VLM_API_KEY:-}"
+      VLM_BATCH_SIZE: "${VLM_BATCH_SIZE:-}"
+      VLM_MODEL_TO_USE: "${VLM_MODEL_TO_USE:-openai-compat}"
+      GRAPH_DB_URI: "${GRAPH_DB_URI:-bolt://graph-db:7687}"
+      GRAPH_DB_USERNAME: "${GRAPH_DB_USERNAME:-neo4j}"
+      GRAPH_DB_PASSWORD: "${GRAPH_DB_PASSWORD:-password}"
+      NUM_VLM_PROCS: "${NUM_VLM_PROCS:-}"
+      NUM_GPUS: "${NUM_GPUS:-}"
+      FORCE_CA_RAG_RESET: "${FORCE_CA_RAG_RESET:-}"
+      VLM_INPUT_WIDTH: "${VLM_INPUT_WIDTH:-}"
+      VLM_INPUT_HEIGHT: "${VLM_INPUT_HEIGHT:-}"
+      ENABLE_DENSE_CAPTION: "${ENABLE_DENSE_CAPTION:-}"
+      ENABLE_AUDIO: "${ENABLE_AUDIO:-false}"
+      INSTALL_PROPRIETARY_CODECS: "${INSTALL_PROPRIETARY_CODECS:-false}"
+      FORCE_SW_AV1_DECODER: "${FORCE_SW_AV1_DECODER:-}"
+      RIVA_ASR_SERVER_URI: "${RIVA_ASR_SERVER_URI:-parakeet-ctc-asr}"
+      RIVA_ASR_SERVER_IS_NIM: "${RIVA_ASR_SERVER_IS_NIM:-true}"
+      RIVA_ASR_SERVER_USE_SSL: "${RIVA_ASR_SERVER_USE_SSL:-false}"
+      RIVA_ASR_SERVER_API_KEY: "${RIVA_ASR_SERVER_API_KEY:-}"
+      RIVA_ASR_SERVER_FUNC_ID: "${RIVA_ASR_SERVER_FUNC_ID:-}"
+      RIVA_ASR_GRPC_PORT: "${RIVA_ASR_GRPC_PORT:-50051}"
+      RIVA_ASR_HTTP_PORT: "${RIVA_ASR_HTTP_PORT:-}"
+      ENABLE_RIVA_SERVER_READINESS_CHECK: "${ENABLE_RIVA_SERVER_READINESS_CHECK:-}"
+      RIVA_ASR_MODEL_NAME: "${RIVA_ASR_MODEL_NAME:-}"
+      VILA_LORA_PATH: "${VILA_LORA_PATH:-}"
+      VSS_LOG_LEVEL: "${VSS_LOG_LEVEL:-}"
+      GDINO_INFERENCE_INTERVAL: "${GDINO_INFERENCE_INTERVAL:-}"
+      NUM_CV_CHUNKS_PER_GPU: "${NUM_CV_CHUNKS_PER_GPU:-}"
+      VSS_EXTRA_ARGS: "${VSS_EXTRA_ARGS:-}"
+      VILA_ENGINE_NGC_RESOURCE: "${VILA_ENGINE_NGC_RESOURCE:-}"
+      VILA_FORCE_ENGINE_BUILD: "${VILA_FORCE_ENGINE_BUILD:-false}"
+      NVILA_VIDEO_MAX_TILES: "${NVILA_VIDEO_MAX_TILES:-}"
+      TRT_LLM_MEM_USAGE_FRACTION: "${TRT_LLM_MEM_USAGE_FRACTION:-}"
+      VSS_RTSP_LATENCY: "${VSS_RTSP_LATENCY:-}"
+      VSS_RTSP_TIMEOUT: "${VSS_RTSP_TIMEOUT:-}"
+      CA_RAG_EMBEDDINGS_DIMENSION: "500"
+    depends_on:
+      - graph-db
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      stack: 67108864
+    ipc: host
+    stdin_open: true
+    tty: true
+    extra_hosts:
+      host.docker.internal: host-gateway
+    networks:
+      - devx
+    profiles: ["local-deployment-single-gpu"]
+
+  via-server-dual-gpu:
+    <<: *via-server-single-gpu
+    configs:
+      - source: server_config_dual_gpu
+        target: /opt/nvidia/via/default_config.yaml
+    profiles: ["local-deployment-dual-gpu"]
+
+  via-server-quad-gpu:
+    <<: *via-server-single-gpu
+    configs:
+      - source: server_config_quad_gpu
+        target: /opt/nvidia/via/default_config.yaml
+    profiles: ["local-deployment-quad-gpu"]
+
+  ## LLM MODELS
+  llama-3-1-8b-instruct:
+    hostname: llama-3-1-8b-instruct
+    image: nvcr.io/nim/meta/llama-3.1-8b-instruct:1.3.3
+    restart: always
+    shm_size: 16gb
+    ports:
+      - "8007:8000"
+    environment:
+      - NGC_API_KEY=${NGC_API_KEY}
+      - NIM_LOW_MEMORY_MODE=1
+      - NIM_RELAX_MEM_CONSTRAINTS=1
+    volumes:
+      - via-nim-cache:/opt/nim/.cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["1"]
+              capabilities: [gpu]
+    extra_hosts:
+      host.docker.internal: host-gateway
+    networks:
+      - devx
+    profiles: ["local-deployment-dual-gpu"]
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import http.client; conn = http.client.HTTPConnection('localhost', 8000); conn.request('GET', '/v1/health/ready'); response = conn.getresponse(); exit(0 if response.status == 200 else 1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 60
+      start_period: 1800s
+
+  llama-3-1-70b-instruct:
+    hostname: llama-3-1-70b-instruct
+    image: nvcr.io/nim/meta/llama-3.1-70b-instruct:1.3.3
+    restart: always
+    shm_size: 16gb
+    ports:
+      - "8007:8000"
+    environment:
+      - NGC_API_KEY=${NGC_API_KEY}
+      - NIM_LOW_MEMORY_MODE=1
+      - NIM_RELAX_MEM_CONSTRAINTS=1
+    volumes:
+      - via-nim-cache:/opt/nim/.cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["2", "3"]
+              capabilities: [gpu]
+    extra_hosts:
+      host.docker.internal: host-gateway
+    networks:
+      - devx
+    profiles: ["local-deployment-quad-gpu"]
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import http.client; conn = http.client.HTTPConnection('localhost', 8000); conn.request('GET', '/v1/health/ready'); response = conn.getresponse(); exit(0 if response.status == 200 else 1)"]
+      interval: 30s
+      timeout: 10s
+      retries: 60
+      start_period: 1800s
+
+  ## EMBEDDING MODEL
+  llama-3-2-nv-embedqa:
+    hostname: llama-3-2-nv-embedqa
+    image: nvcr.io/nim/nvidia/llama-3.2-nv-embedqa-1b-v2:1.3.0
+    restart: always
+    shm_size: 16gb
+    ports:
+      - "8006:8000"
+    environment:
+      - NGC_API_KEY=${NGC_API_KEY}
+      - NIM_SERVER_PORT=8000
+      - NIM_MODEL_PROFILE=f7391ddbcb95b2406853526b8e489fedf20083a2420563ca3e65358ff417b10f
+    volumes:
+      - via-nim-cache:/opt/nim/.cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["1"]
+              capabilities: [gpu]
+    extra_hosts:
+      host.docker.internal: host-gateway
+    networks:
+      - devx
+    profiles: ["local-deployment-dual-gpu", "local-deployment-quad-gpu"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/v1/health/ready"]
+      interval: 30s
+      timeout: 10s
+      retries: 60
+      start_period: 1800s
+
+  ## RERANKER MODEL
+  llama-3.2-nv-rerankqa:
+    hostname: llama-3.2-nv-rerankqa
+    image: nvcr.io/nim/nvidia/llama-3.2-nv-rerankqa-1b-v2:1.3.0
+    restart: always
+    shm_size: 16gb
+    ports:
+      - "8005:8000"
+    environment:
+      - NGC_API_KEY=${NGC_API_KEY}
+      - NIM_SERVER_PORT=8000
+      - NIM_MODEL_PROFILE=f7391ddbcb95b2406853526b8e489fedf20083a2420563ca3e65358ff417b10f
+    volumes:
+      - via-nim-cache:/opt/nim/.cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ["1"]
+              capabilities: [gpu]
+    extra_hosts:
+      host.docker.internal: host-gateway
+    networks:
+      - devx
+    profiles: ["local-deployment-dual-gpu", "local-deployment-quad-gpu"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/v1/health/ready"]
+      interval: 30s
+      timeout: 10s
+      retries: 60
+      start_period: 1800s
+
+  ## DEPENDENCIES
+  graph-db:
+    hostname: graph-db
+    restart: always
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: "${GRAPH_DB_USERNAME:-neo4j}/${GRAPH_DB_PASSWORD:-password}"
+      NEO4J_PLUGINS: '["apoc"]'
+    image: neo4j:5.26.4
+    networks:
+      - devx
+    healthcheck:
+      test: wget http://localhost:7474 || exit 1
+      interval: 1s
+      timeout: 10s
+      retries: 20
+      start_period: 3s
+
+volumes:
+  via-hf-cache:
+  via-ngc-model-cache:
+  via-nim-cache:
+
+networks:
+  devx:
+    driver: bridge
+
+
