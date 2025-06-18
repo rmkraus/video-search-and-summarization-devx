@@ -168,7 +168,6 @@ services:
             - SHELL=/bin/bash
             - NGC_API_KEY=${NGC_API_KEY}
             - COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME:-devx}
-            - RUNTIME_VAR=5
         healthcheck:
             interval: 30s
             retries: 3
@@ -184,6 +183,7 @@ services:
         ports:
             - 8888:8888
         restart: always
+        user: ubuntu
         volumes:
             - ../video-search-and-summarization-devx:/project:cached
             - /var/run/docker.sock:/var/run/docker.sock
