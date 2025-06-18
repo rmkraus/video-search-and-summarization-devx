@@ -1,2 +1,2 @@
-# allow all users to access the conda environment
-sudo chmod o+rx /opt/conda/*
+# join the rapids group for access to python env
+sudo usermod -aG 1001 $(whoami)
