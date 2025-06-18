@@ -6,6 +6,8 @@ SHELL ["/bin/bash", "-c"]
 
 USER root
 
+RUN groupdel $(getent group | awk -F: '$3 == 1000 {print $1}') 2>/dev/null || true
+
 RUN groupmod -g 1000 $(getent group 1001 | cut -d: -f1)
 
 RUN find / -gid 1001 -print0 | xargs -0 chgrp 1000
