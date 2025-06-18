@@ -6,12 +6,6 @@ SHELL ["/bin/bash", "-c"]
 
 USER root
 
-RUN userdel -r $(getent passwd | awk -F: '$3 == 1000 {print $1}') 2>/dev/null || true
-
-RUN usermod -u 1000 rapids
-
-RUN find / -uid 1001 -print0 | xargs -0 chown 1000
-
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     sudo
 
