@@ -6,12 +6,6 @@ SHELL ["/bin/bash", "-c"]
 
 USER root
 
-RUN groupdel $(getent group | awk -F: '$3 == 1000 {print $1}') 2>/dev/null || true
-
-RUN groupmod -g 1000 $(getent group 1001 | cut -d: -f1)
-
-RUN find / -gid 1001 -print0 | xargs -0 chgrp 1000
-
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     sudo
 
@@ -34,7 +28,7 @@ RUN dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')"; wget -O- 
 
 COPY  --chmod=755 ["entrypoint.sh", "/"]
 
-ENV NVWB_BASE_ENV_ENTRYPOINT=/home/rapids/entrypoint.sh
+ENV NVWB_BASE_ENV_ENTRYPOINT=
 
 USER $NVWB_USERNAME
 
