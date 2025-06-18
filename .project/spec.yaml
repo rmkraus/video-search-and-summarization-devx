@@ -52,7 +52,7 @@ environment:
         schema_version: ""
         user_info:
             uid: "1001"
-            gid: "1000"
+            gid: "1001"
             username: rapids
         package_managers:
             - name: apt

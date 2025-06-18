@@ -165,10 +165,10 @@ services:
             - --NotebookApp.default_url=/lab
             - --allow-root
         environment:
-            - RUNTIME_VAR=5
             - SHELL=/bin/bash
             - NGC_API_KEY=${NGC_API_KEY}
             - COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME:-devx}
+            - RUNTIME_VAR=5
         healthcheck:
             interval: 30s
             retries: 3
