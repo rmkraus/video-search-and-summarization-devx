@@ -8,7 +8,7 @@ This workshop will help get you to get started integrating this blueprint in you
 
  - access to NVIDIA cloud resources and documentation
  - a running copy of the VSS blueprint
- - turn-key, portable, developement environment
+ - turn-key, portable, development environment
  - a custom integrated application
 
  The entire lab can take anywhere from 1 to 2 hours to complete.

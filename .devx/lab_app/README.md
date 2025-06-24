@@ -9,7 +9,7 @@ Now we need to integrate this new tooling with our existing processes.
 
 ## Automated Inspections and Audits
 
-Today, we will be assiting local governments with infrastructure inspections.
+Today, we will be assisting local governments with infrastructure inspections.
 Drone pilots will submit inspection footage which will then be triaged by our AI agent.
 
 It is critical that findings from these videos get routed to the correct department.
@@ -26,7 +26,7 @@ Open <button onclick="openOrCreateFileInJupyterLab('code/bridge_inspector.py');"
 This file already has a handful of functions templated. We will work on filling these in.
 
 At the bottom of the file is a function called `main`. This is the entry point to our application.
-This funtion accepts two arguments, both of which will be defined on the command line at run time.
+This function accepts two arguments, both of which will be defined on the command line at run time.
 
 This function has the following structure:
   - Read in the first model id
@@ -35,13 +35,13 @@ This function has the following structure:
     - Summarize the video
     - Chat with the video to get more detail
 
-The reamaining functions will be called by the `main` function to accomplish this task.
+The remaining functions will be called by the `main` function to accomplish this task.
 
 <!--fold:break -->
 
 ### Query Model ID
 
-Inside of the `main` function, at <button onclick="goToLineAndSelect('code/bridge_inspector.py', '# get the first model name');"># get the first model name</button>, we need to call the <button onclick="goToLineAndSelect('code/bridge_inspector.py', 'def lookup_model_id');">lookup_model_id</button> funtion. The function also needs to be populated.
+Inside of the `main` function, at <button onclick="goToLineAndSelect('code/bridge_inspector.py', '# get the first model name');"># get the first model name</button>, we need to call the <button onclick="goToLineAndSelect('code/bridge_inspector.py', 'def lookup_model_id');">lookup_model_id</button> function. The function also needs to be populated.
 
 Reference the previous labs to complete this function.
 
@@ -112,4 +112,4 @@ If everything goes to plan, this will write a full markdown report to the shell.
 
 <img src="_static/robots/blueprint-blend.png" alt="VSS Robot Character" style="float:right; max-width:350px;margin:15px;" />
 
-You now have a fully fleged Video Search and Summarization agent from the NVIDIA AI Blueprint. This can be further integrated into your bussiness processes to unlock domain knowledge from video.
+You now have a fully fledged Video Search and Summarization agent from the NVIDIA AI Blueprint. This can be further integrated into your business processes to unlock domain knowledge from video.

@@ -8,11 +8,11 @@ The VSS Blueprint is up and running and we have worked with the API to process s
 
 ## Streaming Video Ingestion
 
-To ingest streaming video, the stream must first be split into windows of a fixed length. This lenth is called the **sumary duration**.
+To ingest streaming video, the stream must first be split into windows of a fixed length. This length is called the **summary duration**.
 
 One summary is generated for each of these clips.
 
-This fixed length clips are then chunked into blocks of length `chunk_duration`. Chunks can overlap each other by `chunk_overlap_duration`. For each chunk, `num_frames_per_chunk` frames will be selected as input to the VLM.
+These fixed length clips are then chunked into blocks of length `chunk_duration`. Chunks can overlap each other by `chunk_overlap_duration`. For each chunk, `num_frames_per_chunk` frames will be selected as input to the VLM.
 
 ![Chunking Illustration](chunk_duration.png)
 
@@ -22,7 +22,7 @@ Batch video ingestion is also supported by simply uploading a file that has alre
 
 ## Tuning Basics
 
-This excercise will focus on tuning the video chunking. 
+This exercise will focus on tuning the video chunking. 
 The following table summarizes the expected behavior.
 
 | Parameter | Typical Values | Impact on Accuracy | Impact on Perf. |
@@ -30,7 +30,7 @@ The following table summarizes the expected behavior.
 | Summary Duration | 60s | short duration is better for real-time updates | higher duration is more performant |
 | `chunk_duration` | 10s, 30s, 1m | shorter for short actions | longer chunks process faster |
 | `chunk_overlap_duration` | 10s | | |
-| `num_frames_per_chunk` | 8, 10, 16, 32 | more frames incease accuracy | few frames increase speed |
+| `num_frames_per_chunk` | 8, 10, 16, 32 | more frames increase accuracy | few frames increase speed |
 
 <!--fold:break -->
 

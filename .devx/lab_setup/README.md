@@ -26,7 +26,7 @@ All of these steps will be done in the <button onclick="openNewTerminal();"><i c
 
 ## Start the blueprint services
 
-A few profiles have been made avilable depending on your hardware.
+A few profiles have been made available depending on your hardware.
 
 {{#isBrev}}
 > **Note:** Looks like you are running in Brev! We recommend using the Dual GPU profile for optimal performance.

@@ -7,7 +7,7 @@ The Video Search and Summarization is comprised of two pipelines: the **Ingestio
 
 As video is streamed or uploaded into the agent, the video will be pre-processed into chunks of time intervals. These chunks are then used to generate high level summaries as well as a detailed database of observations. This is the Ingestion Pipeline.
 
-The combination of these chunked summaries and knowledge database are then used by the Retrival pipeline to summarize and chat with video streams.
+The combination of these chunked summaries and knowledge database are then used by the Retrieval pipeline to summarize and chat with video streams.
 
 For more info on these pipelines, reference the [Context Aware RAG Integration](https://via.gitlab-master-pages.nvidia.com/via-docs/content/context_aware_rag.html) docs.
 
@@ -67,7 +67,7 @@ Open <button onclick="openOrCreateFileInJupyterLab('code/Intro_To_VSS.ipynb');">
 
 <img src="_static/robots/strong.png" alt="VSS Robot Character" style="float:right; max-width:350px;margin:15px;" />
 
-In that excercise, we created a functional system that can help to improve safety in a warehouse.
+In that exercise, we created a functional system that can help to improve safety in a warehouse.
 We did this with three pretty quick steps:
 
 1. Gather server information (health + models)
@@ -77,4 +77,4 @@ We did this with three pretty quick steps:
 Once that was complete, the VSS Blueprint's Summarization APIs generated a summary that was that outlined the major events.
 We also used those APIs to chat with the video file to perform a net new analysis.
 
-Very cool! In the next excercise, we will dig deeper into the other parameters that can be tuned.
+Very cool! In the next exercise, we will dig deeper into the other parameters that can be tuned.
