@@ -5,22 +5,47 @@ The Video Search and Summarization is comprised of two pipelines: the **Ingestio
 
 ![VSS Detailed Architecture](vss_arch.png)
 
-As video is streamed or uploaded into the agent, the video will be pre-processed into chunks of time intervals. These chunks are then used to generate high level summaries as well as a detailed database of observations.
+As video is streamed or uploaded into the agent, the video will be pre-processed into chunks of time intervals. These chunks are then used to generate high level summaries as well as a detailed database of observations. This is the Ingestion Pipeline.
 
 The combination of these chunked summaries and knowledge database are then used by the Retrival pipeline to summarize and chat with video streams.
 
-<!--fold:break -->
+For more info on these pipelines, reference the [Context Aware RAG Integration](https://via.gitlab-master-pages.nvidia.com/via-docs/content/context_aware_rag.html) docs.
 
 ## Meet NIM
 
 This blueprint employs four NVIDIA NIM microservices.
 
-| | |
-| --- | --- |
-| [meta/llama-3.3-70b-instruct <i class="fas fa-external-link-alt"></i>](https://build.nvidia.com/meta/llama-3_3-70b-instruct) | Large Language Model used for performing Question and Answering and directly chatting with the end user. |
-| [nvidia/vila <i class="fas fa-external-link-alt"></i>](https://build.nvidia.com/nvidia/vila) | Multi-modal vision-language model that used for creating informative insights about images and video. |
-| [nvidia/nv-embedqa-e5-v5 <i class="fas fa-external-link-alt"></i>](https://build.nvidia.com/nvidia/nv-embedqa-e5-v5) | Embedding model for converting human text into vector representations. |
-| [nvidia/llama-3_2-nv-rerankqa-1b-v2 <i class="fas fa-external-link-alt"></i>](https://build.nvidia.com/nvidia/llama-3_2-nv-rerankqa-1b-v2) | Reranking model for determining content most relevant to a user prompt. |
+<table>
+
+  <tr>
+    <td><a href="https://build.nvidia.com/nvidia/vila"><i class="fas fa-external-link-alt"></i> nvidia/vila</a></td>
+    <td>Vision Language Model</td>
+  </tr><tr>
+    <td colspan=2>Examines the incoming video and extracts key insights.</td>
+  </tr>
+
+  <tr>
+    <td><a href="https://build.nvidia.com/meta/llama-3_3-70b-instruct"><i class="fas fa-external-link-alt"></i> meta/llama-3.3-70b-instruct</a></td>
+    <td>Large Language Model</td>
+  </tr><tr>
+    <td colspan=2>Orchestrates retrieval and chats directly with the end user.</td>
+  </tr>
+
+  <tr>
+    <td><a href="https://build.nvidia.com/nvidia/nv-embedqa-e5-v5"><i class="fas fa-external-link-alt"></i> nvidia/nv-embedqa-e5-v5</a></td>
+    <td>Embedding Model</td>
+  </tr><tr>
+    <td colspan=2>Encodes information for storage in the vector database during ingestion. During retrieval, is used to similarly encode the user's question.</td>
+  </tr>
+
+  <tr>
+    <td><a href="https://build.nvidia.com/nvidia/llama-3_2-nv-rerankqa-1b-v2"><i class="fas fa-external-link-alt"></i> nvidia/llama-3_2-nv-rerankqa-1b-v2</a></td>
+    <td>Reranking Model</td>
+  </tr><tr>
+    <td colspan=2>Sorts database search results by relevancy.</td>
+  </tr>
+
+</table>
 
 <!--fold:break -->
 
