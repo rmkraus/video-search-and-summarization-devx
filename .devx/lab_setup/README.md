@@ -101,6 +101,8 @@ watch sudo docker compose --profile local-deployment-quad-gpu ps
 
 <!-- tabs:end -->
 
+Once all of the services have a status of `Up` and `healthy`, you are ready to continue.
+
 <!--fold:break -->
 
 ## Access the Blueprint Interface

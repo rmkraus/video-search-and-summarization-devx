@@ -9,41 +9,7 @@ As video is streamed or uploaded into the agent, the video will be pre-processed
 
 The combination of these chunked summaries and knowledge database are then used by the Retrival pipeline to summarize and chat with video streams.
 
-<details>
-<summary><b>Vector RAG Close Up</b></summary>
-
-```
-TODO
-```
-
-</details>
-
-<details>
-<summary><b>Graph RAG Close Up</b></summary>
-
-```
-TODO
-```
-
-</details>
-
-<details>
-<summary><b>Data Processing Close Up</b></summary>
-
-```
-TODO
-```
-
-</details>
-
-<details>
-<summary><b>Data Processing Close Up</b></summary>
-
-```
-TODO
-```
-
-</details>
+<!--fold:break -->
 
 ## Meet NIM
 
@@ -56,6 +22,8 @@ This blueprint employs four NVIDIA NIM microservices.
 | [nvidia/nv-embedqa-e5-v5 <i class="fas fa-external-link-alt"></i>](https://build.nvidia.com/nvidia/nv-embedqa-e5-v5) | Embedding model for converting human text into vector representations. |
 | [nvidia/llama-3_2-nv-rerankqa-1b-v2 <i class="fas fa-external-link-alt"></i>](https://build.nvidia.com/nvidia/llama-3_2-nv-rerankqa-1b-v2) | Reranking model for determining content most relevant to a user prompt. |
 
+<!--fold:break -->
+
 ## Explore the API
 
 We will get started by using a Jupyter Notebook to send requests to the Visual Insights Agent's API. An OpenAPI specification for this API is available, and the API can be browsed, at 
@@ -67,6 +35,8 @@ http://{{ hostname }}:8100/docs
 {{/isBrev}}
 
 Open <button onclick="openOrCreateFileInJupyterLab('code/Intro_To_VSS.ipynb');"><i class="fas fa-flask"></i> code/Intro_To_VSS.ipynb</button> to get started.
+
+<!--fold:break -->
 
 ## Wrap up
 
