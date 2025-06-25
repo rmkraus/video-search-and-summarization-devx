@@ -20,15 +20,12 @@
       let hasInitialLoadRun = false;
       let lastScrollY = window.scrollY;
   
-      console.log("[docsify-persistent-scroll] Plugin initialized.");
-  
       // Track scroll changes in memory
       window.addEventListener("scroll", () => {
         let scrollY = window.scrollY;
         if (scrollY > 0) {
           scrollMemory[key] = scrollY;
           lastScrollY = scrollY;
-          console.log(`[docsify-persistent-scroll] Tracked scrollY = ${scrollY}`);
         } else {
           restoreScrollPosition = true;
         }
@@ -38,7 +35,6 @@
       hook.doneEach(function () {
         hasInitialLoadRun = true;
         lastScrollY = window.scrollY;
-        console.log(`[docsify-persistent-scroll] Page rendered. Current scrollY = ${window.scrollY}`);
       });
   
       // Poll every 50ms to detect scroll resets
@@ -50,7 +46,6 @@
         window.scrollTo(0, scrollMemory[key]);
         
         if (window.scrollY > 0) {
-          console.log(`[docsify-persistent-scroll] Scroll reset detected! Restoring to ${scrollMemory[key]}`);
           restoreScrollPosition = false;
           scrollMemory[key] = window.scrollY;
         }
