@@ -6,6 +6,19 @@
 A Docker Compose file has been provided that will start the blueprint services.
 All of these steps will be done in the <button onclick="openNewTerminal();"><i class="fas fa-terminal"></i> Terminal</button>.
 
+## Download Data Files
+
+Let's first make sure we have downloaded the data files we will need.
+
+```bash
+git lfs pull
+```
+
+If this command returns nothing, then everything is already downloaded.
+Otherwise, the download will start.
+
+<!--fold:break -->
+
 ## Login to the NGC Registry
 
 1. [Generate a new API Key](https://build.nvidia.com/settings/api-keys), if you don't already have one. This will begin with `nvapi-.....`.

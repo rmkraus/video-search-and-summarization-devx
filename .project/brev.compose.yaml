@@ -165,9 +165,9 @@ services:
             - --NotebookApp.default_url=/lab
             - --allow-root
         environment:
+            - SHELL=/bin/bash
             - NGC_API_KEY=${NGC_API_KEY}
             - COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME:-devx}
-            - SHELL=/bin/bash
         healthcheck:
             interval: 30s
             retries: 3
@@ -205,6 +205,20 @@ services:
             - 7474:7474
             - 7687:7687
         restart: always
+    host-config:
+        command:
+            - sh
+            - -c
+            - echo '!! NOTE !! This is you workshop\'s host machine.' >> /host/etc/motd && echo '           Feel free to use it as you wish, but changes here' >> /host/etc/motd && echo '           may not be reflected in the workshop.' >> /host/etc/motd && echo '' >> /host/etc/motd && echo 'Launch a shell in your workshop with:' >> /host/etc/motd && echo '  docker exec -it ${COMPOSE_PROJECT_NAME}-devx-1 /bin/bash' >> /host/etc/motd && echo '' >> /host/etc/motd && echo 'MOTD updated successfully' && exit 0
+        environment:
+            - NGC_API_KEY=${NGC_API_KEY}
+            - COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME:-devx}
+        image: ubuntu:24.04
+        restart: "no"
+        user: root
+        volumes:
+            - /:/host:rw
+        working_dir: /host
     llama-3-1-8b-instruct:
         deploy:
             resources:
