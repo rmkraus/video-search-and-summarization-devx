@@ -2,7 +2,7 @@
 
 <img src="_static/robots/assembly.png" alt="VSS Robot Character" style="float:right; max-width:350px;margin:15px;" />
 
-The VSS Blueprint is up and running and we have worked with the API to process some video. Let's practice that again, but also take a deeper dive into tuning the video ingestion pipeline.
+The VSS Blueprint is up and running and we have worked with the API to process some video. Let's practice that again, but also take a deeper dive into the tuning parameters for the video ingestion pipeline.
 
 <!--fold:break -->
 

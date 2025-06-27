@@ -2,10 +2,10 @@
 
 <img src="_static/robots/blueprint.png" alt="VSS Robot Character" style="float:right; max-width:350px;margin:15px;" />
 
-So far, we have focused mostly on the VSS Blueprint: its features, capabilities, and API.
-We used that knowledge to create the core components for a functional system.
+After using a Jupyter Notebook to prototype an application, the learnings from that notebook are then converted into an application. In the last excercise, we prototyped our VSS solution.
+Now we will use the learnings in <button onclick="openOrCreateFileInJupyterLab('code/Custom_VSS.ipynb');"><i class="fas fa-flask"></i> code/Custom_VSS.ipynb</button> to create a custom Python application.
 
-Now we need to integrate this new tooling with our existing processes.
+<!--fold:break -->
 
 ## Automated Inspections and Audits
 
@@ -17,7 +17,7 @@ It is also vital that safety related issues be escalated to the highest priority
 
 <!--fold:break -->
 
-## Create your application
+## Creating your application
 
 <img src="_static/robots/wrench.png" alt="VSS Robot Character" style="float:left; max-width:200px;margin:15px;" />
 
@@ -29,13 +29,33 @@ At the bottom of the file is a function called `main`. This is the entry point t
 This function accepts two arguments, both of which will be defined on the command line at run time.
 
 This function has the following structure:
-  - Read in the first model id
+  - <button onclick="goToLineAndSelect('code/bridge_inspector.py', '# get the first model name');">Read in the first model id</button> 
   - **For each video file:**
-    - Upload the video
-    - Summarize the video
-    - Chat with the video to get more detail
+    - <button onclick="goToLineAndSelect('code/bridge_inspector.py', '# upload the video');">Upload the video</button> 
+    - <button onclick="goToLineAndSelect('code/bridge_inspector.py', '# summarize the video');">Summarize the video</button> 
+    - <button onclick="goToLineAndSelect('code/bridge_inspector.py', '# ask follow up questions');">Chat with the video to get more detail</button> 
 
 The remaining functions will be called by the `main` function to accomplish this task.
+
+<!--fold:break -->
+
+## Testing your application
+
+To test this application as we write it, open a new <button onclick="openNewTerminal();"><i class="fas fa-terminal"></i> terminal</button>.
+
+To test your application, open a Terminal in Jupyter and navigate to `code/`.
+
+```bash
+cd code
+```
+
+Run your application from the command line:
+
+```bash
+./bridge_inspector.py ../assets/bridge.mp4
+```
+
+For now, you'll see an error. But as we develop our application, you will see more here.
 
 <!--fold:break -->
 
@@ -82,7 +102,6 @@ We haven't made prompts for this yet, but try it out yourself.
 ```python
 escalations = chat_client.query("List any necessary escelations for maintenance.")
 priority = chat_client.query("Score the priority of this report.")
-title = chat_client.query("Create a title for this report.")
 emergencies = chat_client.query("Does this the bridge require immediate structural attention?")
 ```
 
@@ -90,21 +109,9 @@ emergencies = chat_client.query("Does this the bridge require immediate structur
 
 <!--fold:break -->
 
-## Testing you application
+### Verify the results
 
-To test your application, open a Terminal in Jupyter and navigate to `code/`.
-
-```bash
-cd code
-```
-
-Run your application from the command line:
-
-```bash
-./bridge_inspector.py assets/bridge.mp4
-```
-
-If everything goes to plan, this will write a full markdown report to the shell.
+At this point, your application should be run in the terminal without errors. When everything works correctly, a Markdown report will be shown. How is the report? You can go back and make changes to your prompts to change what information is documented.
 
 <!--fold:break -->
 

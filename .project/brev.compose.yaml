@@ -164,10 +164,20 @@ services:
             - --NotebookApp.base_url=$PROXY_PREFIX
             - --NotebookApp.default_url=/lab
             - --allow-root
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - capabilities:
+                            - gpu
+                          count: all
+                          driver: nvidia
         environment:
-            - SHELL=/bin/bash
+            - MODEL_PATH=ngc:nim/nvidia/vila-1.5-40b:vila-yi-34b-siglip-stage3_1003_video_v8
             - NGC_API_KEY=${NGC_API_KEY}
             - COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME:-devx}
+            - SHELL=/bin/bash
+            - VLM_MODEL_TO_USE=vila-1.5
         healthcheck:
             interval: 30s
             retries: 3
@@ -413,7 +423,7 @@ services:
             INSTALL_PROPRIETARY_CODECS: ${INSTALL_PROPRIETARY_CODECS:-false}
             MILVUS_DB_HOST: ${MILVUS_DB_HOST:-}
             MILVUS_DB_PORT: ${MILVUS_DB_PORT:-}
-            MODEL_PATH: ${MODEL_PATH:-}
+            MODEL_PATH: ngc:nim/nvidia/vila-1.5-40b:vila-yi-34b-siglip-stage3_1003_video_v8
             NGC_API_KEY: ${NGC_API_KEY:-}
             NUM_CV_CHUNKS_PER_GPU: ${NUM_CV_CHUNKS_PER_GPU:-}
             NUM_GPUS: ${NUM_GPUS:-}
@@ -422,7 +432,7 @@ services:
             NV_LLMG_CLIENT_SECRET: ${NV_LLMG_CLIENT_SECRET:-}
             NVIDIA_API_KEY: ${NGC_API_KEY:-}
             NVIDIA_VISIBLE_DEVICES: ${NVIDIA_VISIBLE_DEVICES:-all}
-            NVILA_VIDEO_MAX_TILES: ${NVILA_VIDEO_MAX_TILES:-}
+            NVILA_VIDEO_MAX_TILES: ""
             OPENAI_API_KEY: ${OPENAI_API_KEY:-}
             OPENAI_API_VERSION: ${OPENAI_API_VERSION:-}
             RIVA_ASR_GRPC_PORT: ${RIVA_ASR_GRPC_PORT:-50051}
@@ -444,7 +454,7 @@ services:
             VLM_BATCH_SIZE: ${VLM_BATCH_SIZE:-}
             VLM_INPUT_HEIGHT: ${VLM_INPUT_HEIGHT:-}
             VLM_INPUT_WIDTH: ${VLM_INPUT_WIDTH:-}
-            VLM_MODEL_TO_USE: ${VLM_MODEL_TO_USE:-openai-compat}
+            VLM_MODEL_TO_USE: vila-1.5
             VSS_EXTRA_ARGS: ${VSS_EXTRA_ARGS:-}
             VSS_LOG_LEVEL: ${VSS_LOG_LEVEL:-}
             VSS_RTSP_LATENCY: ${VSS_RTSP_LATENCY:-}
@@ -522,7 +532,7 @@ services:
             INSTALL_PROPRIETARY_CODECS: ${INSTALL_PROPRIETARY_CODECS:-false}
             MILVUS_DB_HOST: ${MILVUS_DB_HOST:-}
             MILVUS_DB_PORT: ${MILVUS_DB_PORT:-}
-            MODEL_PATH: ${MODEL_PATH:-}
+            MODEL_PATH: ngc:nim/nvidia/vila-1.5-40b:vila-yi-34b-siglip-stage3_1003_video_v8
             NGC_API_KEY: ${NGC_API_KEY:-}
             NUM_CV_CHUNKS_PER_GPU: ${NUM_CV_CHUNKS_PER_GPU:-}
             NUM_GPUS: ${NUM_GPUS:-}
@@ -531,7 +541,7 @@ services:
             NV_LLMG_CLIENT_SECRET: ${NV_LLMG_CLIENT_SECRET:-}
             NVIDIA_API_KEY: ${NGC_API_KEY:-}
             NVIDIA_VISIBLE_DEVICES: ${NVIDIA_VISIBLE_DEVICES:-all}
-            NVILA_VIDEO_MAX_TILES: ${NVILA_VIDEO_MAX_TILES:-}
+            NVILA_VIDEO_MAX_TILES: ""
             OPENAI_API_KEY: ${OPENAI_API_KEY:-}
             OPENAI_API_VERSION: ${OPENAI_API_VERSION:-}
             RIVA_ASR_GRPC_PORT: ${RIVA_ASR_GRPC_PORT:-50051}
@@ -553,7 +563,7 @@ services:
             VLM_BATCH_SIZE: ${VLM_BATCH_SIZE:-}
             VLM_INPUT_HEIGHT: ${VLM_INPUT_HEIGHT:-}
             VLM_INPUT_WIDTH: ${VLM_INPUT_WIDTH:-}
-            VLM_MODEL_TO_USE: ${VLM_MODEL_TO_USE:-openai-compat}
+            VLM_MODEL_TO_USE: vila-1.5
             VSS_EXTRA_ARGS: ${VSS_EXTRA_ARGS:-}
             VSS_LOG_LEVEL: ${VSS_LOG_LEVEL:-}
             VSS_RTSP_LATENCY: ${VSS_RTSP_LATENCY:-}
@@ -631,7 +641,7 @@ services:
             INSTALL_PROPRIETARY_CODECS: ${INSTALL_PROPRIETARY_CODECS:-false}
             MILVUS_DB_HOST: ${MILVUS_DB_HOST:-}
             MILVUS_DB_PORT: ${MILVUS_DB_PORT:-}
-            MODEL_PATH: ${MODEL_PATH:-}
+            MODEL_PATH: git:https://huggingface.co/Efficient-Large-Model/NVILA-15B
             NGC_API_KEY: ${NGC_API_KEY:-}
             NUM_CV_CHUNKS_PER_GPU: ${NUM_CV_CHUNKS_PER_GPU:-}
             NUM_GPUS: ${NUM_GPUS:-}
@@ -640,7 +650,7 @@ services:
             NV_LLMG_CLIENT_SECRET: ${NV_LLMG_CLIENT_SECRET:-}
             NVIDIA_API_KEY: ${NGC_API_KEY:-}
             NVIDIA_VISIBLE_DEVICES: ${NVIDIA_VISIBLE_DEVICES:-all}
-            NVILA_VIDEO_MAX_TILES: ${NVILA_VIDEO_MAX_TILES:-}
+            NVILA_VIDEO_MAX_TILES: "1"
             OPENAI_API_KEY: ${OPENAI_API_KEY:-}
             OPENAI_API_VERSION: ${OPENAI_API_VERSION:-}
             RIVA_ASR_GRPC_PORT: ${RIVA_ASR_GRPC_PORT:-50051}
@@ -662,7 +672,7 @@ services:
             VLM_BATCH_SIZE: ${VLM_BATCH_SIZE:-}
             VLM_INPUT_HEIGHT: ${VLM_INPUT_HEIGHT:-}
             VLM_INPUT_WIDTH: ${VLM_INPUT_WIDTH:-}
-            VLM_MODEL_TO_USE: ${VLM_MODEL_TO_USE:-openai-compat}
+            VLM_MODEL_TO_USE: nvila
             VSS_EXTRA_ARGS: ${VSS_EXTRA_ARGS:-}
             VSS_LOG_LEVEL: ${VSS_LOG_LEVEL:-}
             VSS_RTSP_LATENCY: ${VSS_RTSP_LATENCY:-}

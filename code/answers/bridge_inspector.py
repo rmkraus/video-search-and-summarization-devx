@@ -71,7 +71,7 @@ def summarize_video(vss_url: str, video_id: str, model_id: str):
             "max_tokens": 1024,
             "temperature": 0.9,
             "top_p": 0.9,
-            "num_frames_per_chunk": 15,
+            "num_frames_per_chunk": 5,
             "chunk_duration": 35,
             "chunk_overlap_duration":5,
             "enable_chat": True,
@@ -115,17 +115,11 @@ def pipeline(video_files: list[str], vss_url: str):
             model_id=model_id,
         )
 
-        # wait for the database to be ready
-        print("Waiting for database to be ready.")
-        while chat_client.query("Are you ready?") == "Sorry, I don't see that in the video.":
-            print("Waiting 30 seconds...")
-            time.sleep(30)
-
         # ask follow up questions
         print("Asking for more information.")
+        title = "Bridge Inspection"
         escalations = chat_client.query("List any necessary escelations for maintenance.")
         priority = chat_client.query("Score the priority of this report.")
-        title = chat_client.query("Create a title for this report.")
         emergencies = chat_client.query("Does this the bridge require immediate structural attention?")
 
         # write a report on the bridge's condition

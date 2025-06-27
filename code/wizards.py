@@ -44,6 +44,7 @@ def tune_chunks(body):
                 display(Markdown("⚠️ **chunk_duration must be greater than chunk_overlap_duration.**"))
                 return
 
+            display(Markdown("## Try tuning these parameters")
             body["num_frames_per_chunk"] = num_frames_per_chunk.value
             body["chunk_duration"] = chunk_duration.value
             body["chunk_overlap_duration"] = chunk_overlap_duration.value

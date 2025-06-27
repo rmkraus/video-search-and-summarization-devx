@@ -1,5 +1,9 @@
 # Introduction to VSS
 
+Now that the services are up and running, we can learn how to integrate VSS into our custom applications. This is achieved via the API. In this exercise, we will review the structure of the API and observe how the API works.
+
+<!-- fold:break -->
+
 ## Architecture
 The Video Search and Summarization is comprised of two pipelines: the **Ingestion** pipeline and the **Retrieval** pipeline.
 
@@ -10,6 +14,8 @@ As video is streamed or uploaded into the agent, the video will be pre-processed
 The combination of these chunked summaries and knowledge database are then used by the Retrieval pipeline to summarize and chat with video streams.
 
 For more info on these pipelines, reference the [Context Aware RAG Integration](https://via.gitlab-master-pages.nvidia.com/via-docs/content/context_aware_rag.html) docs.
+
+<!-- fold:break -->
 
 ## Meet NIM
 
