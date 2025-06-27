@@ -1,8 +1,8 @@
-# Visual Inspection Agent
+# Video Inspection Agent
 
 <img src="_static/robots/blueprint.png" alt="VSS Robot Character" style="float:right; max-width:350px;margin:15px;" />
 
-After using a Jupyter Notebook to prototype an application, the learnings from that notebook are then converted into an application. In the last excercise, we prototyped our VSS solution.
+After using a Jupyter Notebook to prototype an application, the learnings from that notebook are then converted into an application. In the last exercise, we prototyped our VSS solution.
 Now we will use the learnings in <button onclick="openOrCreateFileInJupyterLab('code/Custom_VSS.ipynb');"><i class="fas fa-flask"></i> code/Custom_VSS.ipynb</button> to create a custom Python application.
 
 <!--fold:break -->
@@ -80,7 +80,7 @@ Remember this is done using a `POST` request and uploading the bytes.
 
 ### Video Summarization
 
-<button onclick="goToLineAndSelect('code/bridge_inspector.py', 'def summarize_video');">summarize_video</button> should use the uploaded video ID to request a summary of the video. In the last excercise, we made some effective prompts that will help here.
+<button onclick="goToLineAndSelect('code/bridge_inspector.py', 'def summarize_video');">summarize_video</button> should use the uploaded video ID to request a summary of the video. In the last exercise, we made some effective prompts that will help here.
 
 This function should be invoked by <button onclick="goToLineAndSelect('code/bridge_inspector.py', '# summarize the video');"># summarize the video</button> block of code.
 
@@ -100,9 +100,9 @@ We haven't made prompts for this yet, but try it out yourself.
 <summary><b>💢 Stuck?</b></summary>
 
 ```python
-escalations = chat_client.query("List any necessary escelations for maintenance.")
+escalations = chat_client.query("List any necessary escalations for maintenance.")
 priority = chat_client.query("Score the priority of this report.")
-emergencies = chat_client.query("Does this the bridge require immediate structural attention?")
+emergencies = chat_client.query("Does this bridge require immediate structural attention?")
 ```
 
 </details>

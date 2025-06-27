@@ -3,7 +3,7 @@
 <img src="_static/robots/startup.png" alt="VSS Robot Character" style="float:right; max-width:350px;margin:15px;" />
 
 
-Before getting started, we will use Docker Compose to start the blueprint.
+Before getting started, we will use Docker Compose to start the Blueprint.
 
 To do this, you will need an NVIDIA API Key. If you don't already have one, you can [generate an API Key](https://build.nvidia.com/settings/api-keys). This will begin with `nvapi-.....`.
 
@@ -37,7 +37,7 @@ git lfs pull
 
 <!--fold:break -->
 
-## Start the blueprint services
+## Start the Blueprint services
 
 A few profiles have been made available depending on your hardware.
 
@@ -56,7 +56,7 @@ A few profiles have been made available depending on your hardware.
 | Reranking | nvidia/llama-3.2-nv-rerankqa-1b-v2" | 🔴 no |
 | LLM | meta/llama-3.1-70b-instruct | 🔴 no | |
 
-To start the blueprint in this configuration, use the following command:
+To start the Blueprint in this configuration, use the following command:
 
 ```bash
 sudo -E docker compose --profile local-deployment-single-gpu up -d
@@ -78,7 +78,7 @@ watch sudo -E docker compose --profile local-deployment-single-gpu ps
 | LLM | meta/llama-3.1-8b-instruct | 🟢 yes | 2 |
 
 
-To start the blueprint in this configuration, use the following command:
+To start the Blueprint in this configuration, use the following command:
 
 ```bash
 sudo -E docker compose --profile local-deployment-dual-gpu up -d
@@ -100,7 +100,7 @@ watch sudo -E docker compose --profile local-deployment-dual-gpu ps
 | LLM | meta/llama-3.1-70b-instruct | 🟢 yes | 3 |
 
 
-To start the blueprint in this configuration, use the following command:
+To start the Blueprint in this configuration, use the following command:
 
 ```bash
 sudo -E docker compose --profile local-deployment-quad-gpu up -d
@@ -120,7 +120,7 @@ Once all of the services have a status of `Up` and `healthy`, you are ready to c
 
 ## Stopping the Blueprint
 
-Don't run these commands now! But these commands will help you shutdown the blueprint, when you are ready.
+Don't run these commands now! But these commands will help you shutdown the Blueprint, when you are ready.
 
 <!-- tabs:start -->
 

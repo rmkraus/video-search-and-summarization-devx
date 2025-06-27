@@ -5,7 +5,7 @@ Now that the services are up and running, we can learn how to integrate VSS into
 <!-- fold:break -->
 
 ## Architecture
-The Video Search and Summarization is comprised of two pipelines: the **Ingestion** pipeline and the **Retrieval** pipeline.
+The Video Search and Summarization comprises two pipelines: the **Ingestion** pipeline and the **Retrieval** pipeline.
 
 ![VSS Detailed Architecture](vss_arch.png)
 
@@ -19,7 +19,7 @@ For more info on these pipelines, reference the [Context Aware RAG Integration](
 
 ## Meet NIM
 
-This blueprint employs four NVIDIA NIM microservices.
+This Blueprint employs four NVIDIA NIM microservices.
 
 <table>
 
@@ -57,7 +57,7 @@ This blueprint employs four NVIDIA NIM microservices.
 
 ## Explore the API
 
-We will get started by using a Jupyter Notebook to send requests to the Visual Insights Agent's API. An OpenAPI specification for this API is available, and the API can be browsed, at 
+We will get started by using a Jupyter Notebook to send requests to the Video Insights Agent's API. An OpenAPI specification for this API is available, and the API can be browsed, at 
 {{#isBrev}}
 https://api0-{{brevId}}.brevlab.com/docs
 {{/isBrev}}
