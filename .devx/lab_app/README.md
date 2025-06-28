@@ -90,7 +90,7 @@ Make sure you enable chat!
 
 ### Chat with your video
 
-Use the `Chat` class from before (it is already imported from `helpers`), and connect to the VSS Chat server. In this example, the VSS URL is provided at runtime. Put this code in the <button onclick="goToLineAndSelect('code/bridge_inspector.py', '# summarize the video');"># summarize the video</button> block.
+Use the `Chat` class from before (it is already imported from `helpers`), and connect to the VSS Chat server. In this example, the VSS URL is provided at runtime. Put this code in the <button onclick="goToLineAndSelect('code/bridge_inspector.py', '# connect to the chat server');"># connect to the chat server</button> block.
 
 <button onclick="goToLineAndSelect('code/bridge_inspector.py', '# ask follow up questions');"># ask follow up questions</button> should use the chat API to request additional information. We need to ask the chat model about maintenance escalations, priority of repairs, a report title, and a list of any emergency repairs that are needed.
 

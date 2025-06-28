@@ -39,6 +39,8 @@ git lfs pull
 
 ## Start the Blueprint services
 
+Now, we will start the VSS Blueprint. Note that these commands will take some time to return as they download and stage the necessary models and code.
+
 A few profiles have been made available depending on your hardware.
 
 {{#isBrev}}
@@ -47,7 +49,7 @@ A few profiles have been made available depending on your hardware.
 
 <!-- tabs:start -->
 
-### **Single GPU - min 40GB**
+### **Single GPU - min 80GB**
 
 |  | Model | Self-hosted | GPU ID |
 | --- | --- | --- | -- |
@@ -68,7 +70,7 @@ Watch the status of the containers and wait for them to become healthy with this
 watch sudo -E docker compose --profile local-deployment-single-gpu ps
 ```
 
-### **Dual GPUs - min 40GB**
+### **Dual GPUs - min 80GB**
 
 |  | Model | Self-hosted | GPU ID |
 | --- | --- | --- | --- |
@@ -90,7 +92,7 @@ Watch the status of the containers and wait for them to become healthy with this
 watch sudo -E docker compose --profile local-deployment-dual-gpu ps
 ```
 
-### **Quad GPUs - min 80GB**
+### **Quad GPUs - min 40GB**
 
 |  | Model | Self-hosted | GPU ID |
 | --- | --- | --- | --- |

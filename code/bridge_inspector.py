@@ -19,12 +19,11 @@ def lookup_model_id(vss_url: str):
 
     Returns: [str] The ID of the first model
     """
-    models_response = vss_api_call(vss_url, "models")
-    return models_response["data"][0]["id"]
+    ...  # TODO
 
 
 def upload_video_to_vss(vss_url: str, file_path: str):
-    """Upload a video file to to the VSS API.
+    """Upload a video file to the VSS API.
     
     Inputs:
       vss_url: [str] The HTTP URL to the VSS API
@@ -32,23 +31,7 @@ def upload_video_to_vss(vss_url: str, file_path: str):
 
     Returns: [str] The id for the uploaded video.
     """
-    video = Path(file_path)
-    
-    with video.open("rb") as file:
-        # setup query data
-        files = {"file": (video.name, file)}
-        data = {"purpose":"vision", "media_type":"video"}
-    
-        # query the vss api
-        upload_response = vss_api_call(
-            vss_url,
-            "files",
-            verb="post",
-            files=files,
-            data=data
-        )
-
-    return upload_response["id"]
+    ...  # TODO
 
 
 def summarize_video(vss_url: str, video_id: str, model_id: str):
@@ -64,9 +47,9 @@ def summarize_video(vss_url: str, video_id: str, model_id: str):
     # create the request body
     body = {
             "id": video_id,
-            "prompt": "You are a bridge inspector. Describe any concerns you have with this bridge in detail. Your concerns may be: cosmetic, structural, landscaping, or vandalism in nature.Start each event description with a start and end time stamp of the event.",
-            "caption_summarization_prompt": "If any descriptions have the same meaning and are sequential then combine them under one sentence and merge the time stamps to a range. Format the timestamps as 'mm:ss'",
-            "summary_aggregation_prompt": "Based on the available information, generate a report that describes the condition of the bridge. The report should be organized into cosemetic, structual, vegetation overgrowth, and vandalism. The report must include timestamps. This should be a concise, yet descriptive summary of all the important events. The format should be intuitive and easy for a user to understand what happened. Format the output in Markdown so it can be displayed nicely.",
+            "prompt": ...,  # TODO
+            "caption_summarization_prompt": ...,  # TODO
+            "summary_aggregation_prompt": ...,  # TODO
             "model": model_id,
             "max_tokens": 1024,
             "temperature": 0.9,
@@ -77,8 +60,8 @@ def summarize_video(vss_url: str, video_id: str, model_id: str):
             "enable_chat": True,
     }
 
-    # send the to vss server
-    summarize_response = vss_api_call(vss_url, "summarize", verb="post", json=body)
+    # send to vss server
+    summarize_response = ...  # TODO
     return summarize_response["choices"][0]["message"]["content"]
 
 
@@ -97,30 +80,26 @@ def write_report(title: str, priority: str, emergencies: str, escalations: str, 
 def pipeline(video_files: list[str], vss_url: str):
     """Run the bridge inspection pipeline."""
     # get the first model name
-    model_id = ...
+    model_id = ...  # TODO
     
     for video in video_files:
         # upload the video
         print(f"Uploading video: {video}")
-        video_id = ...
+        video_id = ...  # TODO
         
         # summarize the video
         print(f"Generating summary for {video_id} using {model_id}")
-        report = ...
+        report = ...  # TODO
 
         # connect to the chat server
-        chat_client = Chat(
-            vss_url, 
-            video_id=video_id,
-            model_id=model_id,
-        )
+        chat_client = ...  # TODO
 
         # ask follow up questions
         print("Asking for more information.")
         title = "Bridge Inspection"
-        escalations = chat_client.query("List any necessary escelations for maintenance.")
-        priority = chat_client.query("Score the priority of this report.")
-        emergencies = chat_client.query("Does this the bridge require immediate structural attention?")
+        escalations = ...  # TODO
+        priority = ...  # TODO
+        emergencies = ...  # TODO
 
         # write a report on the bridge's condition
         print("Write the final report:")

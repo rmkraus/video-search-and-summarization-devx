@@ -46,4 +46,3 @@ By the end of this workshop, you will be able to:
 - **Python Programming**: Familiarity with Python syntax and basic programming concepts
 - **Command Line**: Comfort with terminal/command line operations
 - **API Concepts**: Basic understanding of REST APIs and JSON data formats
-

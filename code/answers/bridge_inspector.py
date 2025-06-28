@@ -24,7 +24,7 @@ def lookup_model_id(vss_url: str):
 
 
 def upload_video_to_vss(vss_url: str, file_path: str):
-    """Upload a video file to to the VSS API.
+    """Upload a video file to the VSS API.
     
     Inputs:
       vss_url: [str] The HTTP URL to the VSS API
@@ -66,7 +66,7 @@ def summarize_video(vss_url: str, video_id: str, model_id: str):
             "id": video_id,
             "prompt": "You are a bridge inspector. Describe any concerns you have with this bridge in detail. Your concerns may be: cosmetic, structural, landscaping, or vandalism in nature.Start each event description with a start and end time stamp of the event.",
             "caption_summarization_prompt": "If any descriptions have the same meaning and are sequential then combine them under one sentence and merge the time stamps to a range. Format the timestamps as 'mm:ss'",
-            "summary_aggregation_prompt": "Based on the available information, generate a report that describes the condition of the bridge. The report should be organized into cosemetic, structual, vegetation overgrowth, and vandalism. The report must include timestamps. This should be a concise, yet descriptive summary of all the important events. The format should be intuitive and easy for a user to understand what happened. Format the output in Markdown so it can be displayed nicely.",
+            "summary_aggregation_prompt": "Based on the available information, generate a report that describes the condition of the bridge. The report should be organized into cosmetic, structural, vegetation overgrowth, and vandalism. The report must include timestamps. This should be a concise, yet descriptive summary of all the important events. The format should be intuitive and easy for a user to understand what happened. Format the output in Markdown so it can be displayed nicely.",
             "model": model_id,
             "max_tokens": 1024,
             "temperature": 0.9,
@@ -77,7 +77,7 @@ def summarize_video(vss_url: str, video_id: str, model_id: str):
             "enable_chat": True,
     }
 
-    # send the to vss server
+    # send to vss server
     summarize_response = vss_api_call(vss_url, "summarize", verb="post", json=body)
     return summarize_response["choices"][0]["message"]["content"]
 
@@ -118,9 +118,9 @@ def pipeline(video_files: list[str], vss_url: str):
         # ask follow up questions
         print("Asking for more information.")
         title = "Bridge Inspection"
-        escalations = chat_client.query("List any necessary escelations for maintenance.")
+        escalations = chat_client.query("List any necessary escalations for maintenance.")
         priority = chat_client.query("Score the priority of this report.")
-        emergencies = chat_client.query("Does this the bridge require immediate structural attention?")
+        emergencies = chat_client.query("Does this bridge require immediate structural attention?")
 
         # write a report on the bridge's condition
         print("Write the final report:")
