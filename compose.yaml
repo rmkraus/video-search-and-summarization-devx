@@ -275,8 +275,8 @@ services:
   via-server-dual-gpu:
     <<: *via-server-single-gpu
     environment:
-      VLM_MODEL_TO_USE: "vila-1.5"
-      MODEL_PATH: "ngc:nim/nvidia/vila-1.5-40b:vila-yi-34b-siglip-stage3_1003_video_v8"
+      VLM_MODEL_TO_USE: "nvila"
+      MODEL_PATH: "git:https://huggingface.co/Efficient-Large-Model/NVILA-15B"
       NVILA_VIDEO_MAX_TILES: ""
       # default values
       GRAPH_RAG_PROMPT_CONFIG: "${GRAPH_RAG_PROMPT_CONFIG:-}"

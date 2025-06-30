@@ -49,7 +49,7 @@ A few profiles have been made available depending on your hardware.
 
 <!-- tabs:start -->
 
-### **Single GPU - min 80GB**
+### **Single GPU - min 40GB**
 
 |  | Model | Self-hosted | GPU ID |
 | --- | --- | --- | -- |
@@ -70,7 +70,7 @@ Watch the status of the containers and wait for them to become healthy with this
 watch sudo -E docker compose --profile local-deployment-single-gpu ps
 ```
 
-### **Dual GPUs - min 80GB**
+### **Dual GPUs - min 40GB**
 
 |  | Model | Self-hosted | GPU ID |
 | --- | --- | --- | --- |
@@ -92,11 +92,11 @@ Watch the status of the containers and wait for them to become healthy with this
 watch sudo -E docker compose --profile local-deployment-dual-gpu ps
 ```
 
-### **Quad GPUs - min 40GB**
+### **Quad GPUs - min 80GB**
 
 |  | Model | Self-hosted | GPU ID |
 | --- | --- | --- | --- |
-| VLM | nvila-15b | 🟢 yes | 1 |
+| VLM | vila-40b | 🟢 yes | 1 |
 | Embedding | nvidia/llama-3.2-nv-embedqa-1b-v2 | 🟢 yes | 2 |
 | Reranking | nvidia/llama-3.2-nv-rerankqa-1b-v2 | 🟢 yes | 2 |
 | LLM | meta/llama-3.1-70b-instruct | 🟢 yes | 3 |
