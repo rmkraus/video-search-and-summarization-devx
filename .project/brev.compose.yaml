@@ -173,11 +173,11 @@ services:
                           count: all
                           driver: nvidia
         environment:
+            - SHELL=/bin/bash
+            - VLM_MODEL_TO_USE=vila-1.5
             - MODEL_PATH=ngc:nim/nvidia/vila-1.5-40b:vila-yi-34b-siglip-stage3_1003_video_v8
             - NGC_API_KEY=${NGC_API_KEY}
             - COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME:-devx}
-            - SHELL=/bin/bash
-            - VLM_MODEL_TO_USE=vila-1.5
         healthcheck:
             interval: 30s
             retries: 3
