@@ -173,11 +173,9 @@ services:
                           count: all
                           driver: nvidia
         environment:
-            - SHELL=/bin/bash
-            - VLM_MODEL_TO_USE=vila-1.5
-            - MODEL_PATH=ngc:nim/nvidia/vila-1.5-40b:vila-yi-34b-siglip-stage3_1003_video_v8
-            - NGC_API_KEY=${NGC_API_KEY}
             - COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME:-devx}
+            - SHELL=/bin/bash
+            - NGC_API_KEY=${NGC_API_KEY}
         healthcheck:
             interval: 30s
             retries: 3
@@ -423,7 +421,7 @@ services:
             INSTALL_PROPRIETARY_CODECS: ${INSTALL_PROPRIETARY_CODECS:-false}
             MILVUS_DB_HOST: ${MILVUS_DB_HOST:-}
             MILVUS_DB_PORT: ${MILVUS_DB_PORT:-}
-            MODEL_PATH: ngc:nim/nvidia/vila-1.5-40b:vila-yi-34b-siglip-stage3_1003_video_v8
+            MODEL_PATH: git:https://huggingface.co/Efficient-Large-Model/NVILA-15B
             NGC_API_KEY: ${NGC_API_KEY:-}
             NUM_CV_CHUNKS_PER_GPU: ${NUM_CV_CHUNKS_PER_GPU:-}
             NUM_GPUS: ${NUM_GPUS:-}
@@ -454,7 +452,7 @@ services:
             VLM_BATCH_SIZE: ${VLM_BATCH_SIZE:-}
             VLM_INPUT_HEIGHT: ${VLM_INPUT_HEIGHT:-}
             VLM_INPUT_WIDTH: ${VLM_INPUT_WIDTH:-}
-            VLM_MODEL_TO_USE: vila-1.5
+            VLM_MODEL_TO_USE: nvila
             VSS_EXTRA_ARGS: ${VSS_EXTRA_ARGS:-}
             VSS_LOG_LEVEL: ${VSS_LOG_LEVEL:-}
             VSS_RTSP_LATENCY: ${VSS_RTSP_LATENCY:-}
