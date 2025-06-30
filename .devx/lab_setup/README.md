@@ -26,7 +26,7 @@ git lfs pull
 1. Log into NVIDIA's NGC Registry. Use this command and enter your API Key when prompted.
 
     ```bash
-    sudo docker login -u '$oauthtoken' nvcr.io
+    docker login -u '$oauthtoken' nvcr.io
     ```
 
 1. Save your API Key in an environment variable.
