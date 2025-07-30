@@ -28,9 +28,9 @@ By the end of this workshop, you will be able to:
 ### Hardware Requirements
 
 - **GPU Configuration**: Choose one of the following setups:
-  - **Single GPU**: Minimum 40GB VRAM 
-  - **Dual GPUs**: Minimum 40GB VRAM 
-  - **Quad GPUs**: Minimum 80GB VRAM 
+  - **Single GPU**: Minimum 40GB VRAM
+  - **Dual GPUs**: Minimum 40GB VRAM
+  - **Quad GPUs**: Minimum 80GB VRAM
 - **Storage**: At least 100GB available disk space for models and data
 
 ### NVIDIA Account and Access
@@ -46,3 +46,5 @@ By the end of this workshop, you will be able to:
 - **Python Programming**: Familiarity with Python syntax and basic programming concepts
 - **Command Line**: Comfort with terminal/command line operations
 - **API Concepts**: Basic understanding of REST APIs and JSON data formats
+
+> Head over to [Setting up Secrets](secrets) to get started!

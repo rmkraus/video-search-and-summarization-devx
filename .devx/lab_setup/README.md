@@ -23,17 +23,11 @@ git lfs pull
 
 ## Login to the NGC Registry
 
-1. Log into NVIDIA's NGC Registry. Use this command and enter your API Key when prompted.
+Log into NVIDIA's NGC Registry. Use this command and enter your API Key when prompted.
 
-    ```bash
-    docker login -u '$oauthtoken' nvcr.io
-    ```
-
-1. Save your API Key in an environment variable.
-
-    ```bash
-    export NGC_API_KEY="nvapi-........"
-    ```
+```bash
+echo $NVIDIA_API_KEY | docker login -u '$oauthtoken' nvcr.io --password-stdin
+```
 
 <!--fold:break -->
 
@@ -117,31 +111,3 @@ watch sudo -E docker compose --profile local-deployment-quad-gpu ps
 <!-- tabs:end -->
 
 Once all of the services have a status of `Up` and `healthy`, you are ready to continue.
-
-<!--fold:break -->
-
-## Stopping the Blueprint
-
-Don't run these commands now! But these commands will help you shutdown the Blueprint, when you are ready.
-
-<!-- tabs:start -->
-
-### **Single GPU - min 40GB**
-
-```bash
-sudo -E docker compose --profile local-deployment-single-gpu down
-```
-
-### **Dual GPUs - min 40GB**
-
-```bash
-sudo -E docker compose --profile local-deployment-dual-gpu down
-```
-
-### **Quad GPUs - min 80GB**
-
-```bash
-sudo -E docker compose --profile local-deployment-quad-gpu down
-```
-
-<!-- tabs:end -->
