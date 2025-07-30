@@ -24,28 +24,28 @@ This Blueprint employs four NVIDIA NIM microservices.
 <table>
 
   <tr>
-    <td><a href="https://build.nvidia.com/nvidia/vila"><i class="fas fa-external-link-alt"></i> nvidia/vila</a></td>
+    <td><a href="https://build.nvidia.com/nvidia/vila" target="_blank"><i class="fas fa-external-link-alt"></i> nvidia/vila</a></td>
     <td>Vision Language Model</td>
   </tr><tr>
     <td colspan=2>Examines the incoming video and extracts key insights.</td>
   </tr>
 
   <tr>
-    <td><a href="https://build.nvidia.com/meta/llama-3_3-70b-instruct"><i class="fas fa-external-link-alt"></i> meta/llama-3.3-70b-instruct</a></td>
+    <td><a href="https://build.nvidia.com/meta/llama-3_3-70b-instruct" target="_blank"><i class="fas fa-external-link-alt"></i> meta/llama-3.3-70b-instruct</a></td>
     <td>Large Language Model</td>
   </tr><tr>
     <td colspan=2>Orchestrates retrieval and chats directly with the end user.</td>
   </tr>
 
   <tr>
-    <td><a href="https://build.nvidia.com/nvidia/nv-embedqa-e5-v5"><i class="fas fa-external-link-alt"></i> nvidia/nv-embedqa-e5-v5</a></td>
+    <td><a href="https://build.nvidia.com/nvidia/nv-embedqa-e5-v5" target="_blank"><i class="fas fa-external-link-alt"></i> nvidia/nv-embedqa-e5-v5</a></td>
     <td>Embedding Model</td>
   </tr><tr>
     <td colspan=2>Encodes information for storage in the vector database during ingestion. During retrieval, is used to similarly encode the user's question.</td>
   </tr>
 
   <tr>
-    <td><a href="https://build.nvidia.com/nvidia/llama-3_2-nv-rerankqa-1b-v2"><i class="fas fa-external-link-alt"></i> nvidia/llama-3_2-nv-rerankqa-1b-v2</a></td>
+    <td><a href="https://build.nvidia.com/nvidia/llama-3_2-nv-rerankqa-1b-v2" target="_blank"><i class="fas fa-external-link-alt"></i> nvidia/llama-3_2-nv-rerankqa-1b-v2</a></td>
     <td>Reranking Model</td>
   </tr><tr>
     <td colspan=2>Sorts database search results by relevancy.</td>
@@ -57,7 +57,7 @@ This Blueprint employs four NVIDIA NIM microservices.
 
 ## Explore the API
 
-We will get started by using a Jupyter Notebook to send requests to the Video Insights Agent's API. An OpenAPI specification for this API is available, and the API can be browsed, at 
+We will get started by using a Jupyter Notebook to send requests to the Video Insights Agent's API. An OpenAPI specification for this API is available, and the API can be browsed, at
 {{#isBrev}}
 https://api0-{{brevId}}.brevlab.com/docs
 {{/isBrev}}
