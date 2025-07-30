@@ -127,6 +127,21 @@ async function openFile(app, path, factory = null) {
     }
 }
 
+async function openVoila(path) {
+    const app = window.parent.jupyterapp;
+    if (!app) {
+        console.error('JupyterLab app is not available on window.jupyterapp');
+        return;
+    }
+
+    try {
+        await openFile(app, path, "Voila Preview");
+        console.log(`Opened ${path} with Voila Preview successfully`);
+    } catch (error) {
+        console.error(`Failed to open ${path} with Voila Preview:`, error);
+    }
+}
+
 function getParentDirectory(path) {
     const parts = path.split('/');
     parts.pop(); // remove the file name
